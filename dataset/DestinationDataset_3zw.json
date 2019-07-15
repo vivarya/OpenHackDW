@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_3zw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"fileName": "",
+			"folderPath": "videofiles/RawData/FourthCoffee"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

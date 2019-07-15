@@ -1,0 +1,136 @@
+{
+	"name": "CopyVanArsdelLtd",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_qc9",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_qc9",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.tableName}"
+								},
+								{
+									"name": "Destination",
+									"value": "videofiles/RawData/VanArsdelLtd/@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSetting"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSetting",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"enableSkipIncompatibleRow": true
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_qc9",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_tableName": "@item().source.tableName"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_qc9",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"tableName": "[dbo].[Actors]"
+						},
+						"destination": {
+							"fileName": "[dbo].[Actors].txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[dbo].[Customers]"
+						},
+						"destination": {
+							"fileName": "[dbo].[Customers].txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[dbo].[MovieActors]"
+						},
+						"destination": {
+							"fileName": "[dbo].[MovieActors].txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[dbo].[Movies]"
+						},
+						"destination": {
+							"fileName": "[dbo].[Movies].txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[dbo].[OnlineMovieMappings]"
+						},
+						"destination": {
+							"fileName": "[dbo].[OnlineMovieMappings].txt"
+						}
+					},
+					{
+						"source": {
+							"tableName": "[dbo].[Transactions]"
+						},
+						"destination": {
+							"fileName": "[dbo].[Transactions].txt"
+						}
+					}
+				]
+			}
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

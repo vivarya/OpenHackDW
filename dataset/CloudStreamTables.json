@@ -1,0 +1,47 @@
+{
+	"name": "CloudStreamTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SRCloudStoreSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "OrderID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "CustomerID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "OrderDate",
+				"type": "date"
+			},
+			{
+				"name": "ShipDate",
+				"type": "date"
+			},
+			{
+				"name": "TotalCost",
+				"type": "money",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "CreatedDate",
+				"type": "date"
+			},
+			{
+				"name": "UpdatedDate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[Orders]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
